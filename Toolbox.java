@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Toolbox 
 {
     static Scanner scanner = new Scanner(System.in);
+
+    // 
     public static void main(String[] args) throws Exception
     {
         while (true) { 
@@ -11,6 +13,7 @@ public class Toolbox
         }
     }
 
+    // Menu principal
     public static void MainMenu()
     {
         System.out.println("=== Menu Principal ===");
@@ -46,6 +49,7 @@ public class Toolbox
         }
     }
 
+    // Menu de cadastro de pessoas
     public static void displayPplRegistrationMenu()
     {
      System.out.println("1 - Incluir pessoa");
@@ -53,6 +57,7 @@ public class Toolbox
      System.out.println("3 - Remover pessoa");
      System.out.println("4 - Consultar pessoas");
      System.out.println("0 - Voltar ao menu principal");
+     System.out.print("Escolha uma opção: ");
 
         int option = scanner.nextInt();
     
@@ -77,37 +82,48 @@ public class Toolbox
                 System.out.print("Opção inválida. Tente novamente.");
         }
     }
-
+    
+    // Cadastrar pessoas
     public static void InsertPerson()
     {
-        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+        System.out.println("Digite o nome de quem você deseja cadastrar: ");
+
+        var nome = scanner.nextInt();
     }
 
+    // Alterar pessoas cadastradas.
     public static void ChangePerson()
     {
-        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+        System.out.println("Digite o nome da pessoa que você deseja alterar: ");
     }
 
+    // Remover alguma pessoa cadastrada.
     public static void RemovePerson()
     {
-        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+        System.out.println("Digite o nome da pessoa que deseja remover: ");
     }
 
+    // Consultar as pessoas cadastradas.
     public static void ConsultPeople()
     {
-        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+
     }
-    
+
+
+
+
+    // Menu de cadastro dos tipos de objetos.
     public static void displayObjTpRegistrationMenu()
     {
      
     }
 
+    // Menu de cadastro dos objetos.
     public static void displayObjRegistrationMenu()
     {
      
     }
-
+    // Menu de cadastro das manutenções das ferramentas.
     public static void displayMtcRegistrationMenu()
     {
      
