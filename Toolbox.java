@@ -78,6 +78,26 @@ public class Toolbox
         }
     }
 
+    public static void InsertPerson()
+    {
+        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+    }
+
+    public static void ChangePerson()
+    {
+        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+    }
+
+    public static void RemovePerson()
+    {
+        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+    }
+
+    public static void ConsultPeople()
+    {
+        System.out.println("Digite o nome da pessoa que deseja cadastrar: ");
+    }
+    
     public static void displayObjTpRegistrationMenu()
     {
      
