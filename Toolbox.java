@@ -20,10 +20,10 @@ public class Toolbox
     public static void MainMenu() 
     {
         System.out.println("=== Menu Principal ===");
-        System.out.println("1 - Menu de pessoas");
-        System.out.println("2 - Menu de tipos de objetos");
-        System.out.println("3 - Menu de objetos");
-        System.out.println("4 - Menu de manutenções");
+        System.out.println("1 - Cadastro de pessoas");
+        System.out.println("2 - Cadastro de tipos de objetos");
+        System.out.println("3 - Cadastro de objetos");
+        System.out.println("4 - Cadastro de manutenções");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
 
@@ -78,7 +78,7 @@ public class Toolbox
                 ConsultPeople(); // Consultar as pessoas cadastradas.
                 break;
             case 0:
-                System.out.println("Fechando o menu de pessoas.");
+                System.out.println("Fechando o menu de cadastro de pessoas.");
                 MainMenu();
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
@@ -135,7 +135,7 @@ public class Toolbox
             case 4:
                 ConsultTypesOfObjects(); // Consultar tipos de objetos cadastrados.
             case 0:
-                System.out.println("Fechando o menu de tipos de objetos.");
+                System.out.println("Fechando o menu de cadastro de tipos de objetos.");
                 System.exit(0);
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
@@ -193,7 +193,7 @@ public class Toolbox
             case 4:
                 ConsultObjects(); // Consultar objetos cadastrados.
             case 0:
-                System.out.println("Fechando o menu de objetos.");
+                System.out.println("Fechando o menu de cadastro de objetos.");
                 System.exit(0);
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
@@ -250,7 +250,7 @@ public class Toolbox
             case 4:
                 ConsultMaintenance(); // Consultar manutenções cadastradas.
             case 0:
-                System.out.println("Fechando o menu de manutenções.");
+                System.out.println("Fechando o menu de cadastro de manutenções.");
                 System.exit(0);
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
