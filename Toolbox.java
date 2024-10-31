@@ -78,7 +78,7 @@ public class Toolbox
                 ConsultPeople(); // Consultar as pessoas cadastradas.
                 break;
             case 0:
-                System.out.println("Fechando o menu de pessoas");
+                System.out.println("Fechando o menu de pessoas.");
                 MainMenu();
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
