@@ -1,10 +1,28 @@
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+class Pessoa
+{
+    private String nome;
+
+    public Pessoa(String nome)
+    {
+        this.nome = nome;
+    }
+
+    public String toString()
+    {
+        return "Nome: " + nome;
+    }
+}
 
 public class Toolbox 
 {
+    
+    static Scanner scanner = new Scanner(System.in);    
+    static List<Pessoa> pessoas = new ArrayList<>();
 
-    static Scanner scanner = new Scanner(System.in);
 
     //region Public Static Void MAIN
     // Comando para o "main" ficar rodando infinitamente, para finalizar apenas se usuário selecionar a opção "sair".
@@ -88,7 +106,13 @@ public class Toolbox
     // 1 - Cadastrar pessoas.
     public static void InsertPerson() 
     {
+        System.out.println("Digite o nome da pessoa: ");
+        String pessoa = scanner.nextLine();
 
+        Pessoa novaPessoa = new Pessoa(pessoa);
+        pessoas.add(novaPessoa);
+
+        System.out.println("Pessoa adicionada com sucesso!");
     }
 
     // 2 - Alterar pessoas cadastradas.
@@ -136,7 +160,7 @@ public class Toolbox
                 ConsultTypesOfObjects(); // Consultar tipos de objetos cadastrados.
             case 0:
                 System.out.println("Fechando o menu de cadastro de tipos de objetos.");
-                System.exit(0);
+                MainMenu();
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
         }
@@ -194,7 +218,7 @@ public class Toolbox
                 ConsultObjects(); // Consultar objetos cadastrados.
             case 0:
                 System.out.println("Fechando o menu de cadastro de objetos.");
-                System.exit(0);
+                MainMenu();
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
         }
@@ -251,7 +275,7 @@ public class Toolbox
                 ConsultMaintenance(); // Consultar manutenções cadastradas.
             case 0:
                 System.out.println("Fechando o menu de cadastro de manutenções.");
-                System.exit(0);
+                MainMenu();
             default: // Caso seja digitado alguma opção sem ser as propostas.
                 System.out.println("Opção inválida. Tente novamente.");
         }
