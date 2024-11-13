@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//region Criação da classe "Pessoa"
 class Pessoa
 {
     private String nome;
 
-    public Pessoa(String nome)
+    public Pessoa(String name)
     {
-        this.nome = nome;
+        this.nome = name;
     }
 
     public String toString()
@@ -16,12 +17,13 @@ class Pessoa
         return "Nome: " + nome;
     }
 }
+//#endregion
 
 public class Toolbox 
 {
     
     static Scanner scanner = new Scanner(System.in);    
-    static List<Pessoa> pessoas = new ArrayList<>();
+    static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
 
 
     //region Public Static Void MAIN
