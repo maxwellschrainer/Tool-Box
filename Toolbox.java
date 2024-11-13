@@ -19,9 +19,26 @@ class Pessoa
 }
 //#endregion
 
+//#region Criação da classe "Tipo de objeto".
+class TipoDeObjeto
+{
+    private String TipoDeObjeto;
+
+    public TipoDeObjeto(String tipoDeObjeto)
+    {
+        this.TipoDeObjeto = tipoDeObjeto;
+    }
+
+    public String toString()
+    {
+        return "Tipo de objeto: " + TipoDeObjeto;
+    }
+}
+
 public class Toolbox 
 {
-    
+//#endregion
+
     static Scanner scanner = new Scanner(System.in);    
     static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
 
@@ -108,11 +125,16 @@ public class Toolbox
     // 1 - Cadastrar pessoas.
     public static void InsertPerson() 
     {
+        String nome = "";
+        while (nome.isEmpty())
+        {
         System.out.println("Digite o nome da pessoa: ");
         String pessoa = scanner.nextLine();
 
-        Pessoa novaPessoa = new Pessoa(pessoa);
+        Pessoa novaPessoa = new Pessoa(nome);
         pessoas.add(novaPessoa);
+        
+        }
 
         System.out.println("Pessoa adicionada com sucesso!");
     }
