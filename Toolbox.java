@@ -5,16 +5,16 @@ import java.util.Scanner;
 //region Criação da classe "Pessoa"
 class Pessoa
 {
-    private String nome;
+    private String pessoa;
 
     public Pessoa(String name)
     {
-        this.nome = name;
+        this.pessoa = name;
     }
 
     public String toString()
     {
-        return "Nome: " + nome;
+        return "Nome: " + pessoa;
     }
 }
 //#endregion
@@ -39,10 +39,10 @@ public class Toolbox
 {
 //#endregion
 
-    static Scanner scanner = new Scanner(System.in);    
-    static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
-
-
+static Scanner scanner = new Scanner(System.in);    
+static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
+    
+    
     //region Public Static Void MAIN
     // Comando para o "main" ficar rodando infinitamente, para finalizar apenas se usuário selecionar a opção "sair".
     public static void main(String[] args) throws Exception 
@@ -126,15 +126,15 @@ public class Toolbox
     public static void InsertPerson() 
     {
         String nome = "";
+
         while (nome.isEmpty())
         {
-        System.out.println("Digite o nome da pessoa: ");
-        String pessoa = scanner.nextLine();
-
+            System.out.println("Digite o nome da pessoa: ");
+            nome = scanner.nextLine().trim();
+        }
+        
         Pessoa novaPessoa = new Pessoa(nome);
         pessoas.add(novaPessoa);
-        
-        }
 
         System.out.println("Pessoa adicionada com sucesso!");
     }
