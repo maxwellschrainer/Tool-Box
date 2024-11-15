@@ -71,7 +71,10 @@ public class Toolbox
 
 static Scanner scanner = new Scanner(System.in);    
 static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
-static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
+static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro dos tipos de objeto enquanto o código estiver rodando.
+static List<Objeto> objetos = new ArrayList<>(); // Lista para armazenar o cadastro dos objetos enquanto o código estiver rodando.
+static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar o cadastro das manutenções enquanto o código estiver rodando.
+
     
     
     //region Public Static Void MAIN
@@ -312,7 +315,18 @@ static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o c
     // 1 - Inserir objeto.
     public static void InsertObject()
     {
+        String objeto = "";
 
+        while(objeto.isEmpty())
+        {
+            System.out.println("Digite o objeto que você deseja cadastrar: ");
+            objeto = scanner.nextLine().trim();
+        }
+
+        Objeto novoObjeto = new Objeto(objeto);
+        objetos.add(novoObjeto);
+
+        System.out.println("Objeto cadastrado com sucesso!");
     }
 
     // 2 - Alterar algum objeto cadastrado.
@@ -330,7 +344,15 @@ static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o c
     // 4 - Consultar objetos cadastrados.
     public static void ConsultObjects()
     {
-
+        if(objetos.isEmpty())
+        {   
+            System.out.println("Não há objetos cadastrados.");
+        } else {
+            System.out.println("Objetos cadastrados: ");
+            for(Objeto o: objetos){
+                System.out.println(o);
+            }
+        }
     }
     //#endregion
 
@@ -345,6 +367,7 @@ static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o c
         System.out.print("Escolha uma opção: ");
 
         int option = scanner.nextInt(); // Scanner para ler o que for digitado e aplicar nas opções do "switch".
+        scanner.nextLine();
 
         switch (option) {
             case 1:
@@ -369,7 +392,17 @@ static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o c
     // 1 - Inserir manutenção.
     public static void InsertMaintenance()
     {
+        String manutencao = "";
 
+        while(manutencao.isEmpty())
+        {
+            System.out.println("Digite a manutenção que você deseja cadastrar: ");
+            manutencao = scanner.nextLine().trim();
+        }
+
+        System.out.println("Manutenção cadastrada com sucesso!");
+        Manutencao novaManutencao = new Manutencao(manutencao);
+        manutencoes.add(novaManutencao);
     }
 
     // 2 - Alterar alguma manutenção cadastrada.
@@ -387,7 +420,15 @@ static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o c
     // 4 - Consultar manutenções cadastradas.
     public static void ConsultMaintenance()
     {
-
+        if(manutencoes.isEmpty())
+        {
+            System.out.println("Não há manutenções cadastradas.");
+        } else {
+            System.out.println("Manutenções cadastradas: ");
+            for(Manutencao m: manutencoes){
+                System.out.println(m);
+            }
+        }
     }
     //#endregion
 }
