@@ -24,14 +24,44 @@ class TipoDeObjeto
 {
     private String tipo;
 
-    public TipoDeObjeto(String tipoDeObjeto)
+    public TipoDeObjeto(String type)
     {
-        this.tipo = tipoDeObjeto;
+        this.tipo = type;
     }
 
     public String toString()
     {
         return "Tipo de objeto: " + tipo;
+    }
+}
+
+class Objeto
+{
+    private String objeto;
+
+    public Objeto(String object)
+    {
+        this.objeto = object;
+    }
+
+    public String toString()
+    {
+        return "Objeto: " + objeto;
+    }
+}
+
+class Manutencao
+{
+    private String manutencao;
+
+    public Manutencao(String maintenance)
+    {
+        this.manutencao = maintenance;
+    }
+
+    public String toString()
+    {
+        return "Manutenção: " + manutencao;
     }
 }
 
@@ -41,6 +71,7 @@ public class Toolbox
 
 static Scanner scanner = new Scanner(System.in);    
 static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
+static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
     
     
     //region Public Static Void MAIN
@@ -178,6 +209,7 @@ static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadas
         System.out.print("Escolha uma opção: ");
 
         int option = scanner.nextInt(); // Scanner para ler o que for digitado e aplicar nas opções do "switch".
+        scanner.nextLine();
 
         switch (option) {
             case 1:
@@ -203,7 +235,18 @@ static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadas
     // 1 - Inserir tipo de objeto.
     public static void InsertObjectType()
     {
+        String tipo = "";
+
+        while (tipo.isEmpty())
+        {
+            System.out.println("Digite o tipo de objeto que deseja cadastrar: ");
+            tipo = scanner.nextLine().trim();
+        }
         
+        TipoDeObjeto novoTipo = new TipoDeObjeto(tipo);
+        tipos.add(novoTipo);
+
+        System.out.println("Tipo de objeto cadastrado com sucesso!");
     }
 
     // 2 - Alterar algum tipo de objeto cadastrado.
@@ -221,7 +264,15 @@ static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadas
     // 4 - Consultar tipos de objetos cadastrados.
     public static void ConsultTypesOfObjects()
     {
-        
+        if (tipos.isEmpty())
+        {
+            System.out.println("Não há tipos de objeto cadastrados.");
+        } else {
+            System.out.println("Tipos de objetos cadastrados");
+            for (TipoDeObjeto t: tipos){
+                System.out.println(t);
+            }
+        }
     }
     //#endregion
 
@@ -236,6 +287,7 @@ static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadas
         System.out.print("Escolha uma opção: ");
 
         int option = scanner.nextInt(); // Scanner para ler o que for digitado e aplicar nas opções do "switch".
+        scanner.nextLine();
 
         switch (option) {
             case 1:
