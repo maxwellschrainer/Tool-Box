@@ -22,16 +22,16 @@ class Pessoa
 //#region Criação da classe "Tipo de objeto".
 class TipoDeObjeto
 {
-    private String TipoDeObjeto;
+    private String tipo;
 
     public TipoDeObjeto(String tipoDeObjeto)
     {
-        this.TipoDeObjeto = tipoDeObjeto;
+        this.tipo = tipoDeObjeto;
     }
 
     public String toString()
     {
-        return "Tipo de objeto: " + TipoDeObjeto;
+        return "Tipo de objeto: " + tipo;
     }
 }
 
@@ -100,6 +100,7 @@ static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadas
         System.out.print("Escolha uma opção: ");
 
         int option = scanner.nextInt(); // Scanner para ler o que for digitado e aplicar nas opções do "switch".
+        scanner.nextLine();
 
         switch (option) {
             case 1:
@@ -154,7 +155,15 @@ static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadas
     // 4 - Consultar as pessoas cadastradas.
     public static void ConsultPeople() 
     {
-
+        if (pessoas.isEmpty())
+        {
+            System.out.println("Não há pessoas cadastradas.");
+        } else {
+            System.out.println("Pessoas cadastradas: ");
+            for (Pessoa p: pessoas) {
+                System.out.println(p);
+            }
+        }
     }
     //#endregion
 
