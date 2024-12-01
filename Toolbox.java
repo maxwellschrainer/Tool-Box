@@ -65,11 +65,13 @@ class Manutencao {
 
 public class Toolbox {
 
+//#region Criação das listas
     static Scanner scanner = new Scanner(System.in);
     static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
     static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro dos tipos de objeto enquanto o código estiver rodando.
     static List<Objeto> objetos = new ArrayList<>(); // Lista para armazenar o cadastro dos objetos enquanto o código estiver rodando.
     static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar o cadastro das manutenções enquanto o código estiver rodando. 
+//#endregion
 
     //region Public Static Void MAIN
     // Comando para o "main" ficar rodando infinitamente, para finalizar apenas se usuário selecionar a opção "sair".
