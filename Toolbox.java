@@ -1,86 +1,79 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//region Criação da classe "Pessoa"
-class Pessoa
-{
+//region Criação da classe "Pessoa".
+class Pessoa {
+
     private String pessoa;
 
-    public Pessoa(String name)
-    {
+    public Pessoa(String name) {
         this.pessoa = name;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "Nome: " + pessoa;
     }
 }
 //#endregion
 
 //#region Criação da classe "Tipo de objeto".
-class TipoDeObjeto
-{
+class TipoDeObjeto {
+
     private String tipo;
 
-    public TipoDeObjeto(String type)
-    {
+    public TipoDeObjeto(String type) {
         this.tipo = type;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "Tipo de objeto: " + tipo;
     }
 }
+//#endregion
 
-class Objeto
-{
+//#region Criação da classe "Objeto".
+class Objeto {
+
     private String objeto;
 
-    public Objeto(String object)
-    {
+    public Objeto(String object) {
         this.objeto = object;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "Objeto: " + objeto;
     }
 }
+//#endregion
 
-class Manutencao
-{
+//#region Criação da classe "Manutencao".
+class Manutencao {
+
     private String manutencao;
 
-    public Manutencao(String maintenance)
-    {
+    public Manutencao(String maintenance) {
         this.manutencao = maintenance;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "Manutenção: " + manutencao;
     }
 }
-
-public class Toolbox 
-{
 //#endregion
 
-static Scanner scanner = new Scanner(System.in);    
-static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
-static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro dos tipos de objeto enquanto o código estiver rodando.
-static List<Objeto> objetos = new ArrayList<>(); // Lista para armazenar o cadastro dos objetos enquanto o código estiver rodando.
-static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar o cadastro das manutenções enquanto o código estiver rodando.
+public class Toolbox {
 
-    
-    
+    static Scanner scanner = new Scanner(System.in);
+    static List<Pessoa> pessoas = new ArrayList<>(); // Lista para armazenar o cadastro das pessoas enquanto o código estiver rodando.
+    static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro dos tipos de objeto enquanto o código estiver rodando.
+    static List<Objeto> objetos = new ArrayList<>(); // Lista para armazenar o cadastro dos objetos enquanto o código estiver rodando.
+    static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar o cadastro das manutenções enquanto o código estiver rodando. 
+
     //region Public Static Void MAIN
     // Comando para o "main" ficar rodando infinitamente, para finalizar apenas se usuário selecionar a opção "sair".
-    public static void main(String[] args) throws Exception 
-    {
+    public static void main(String[] args) throws Exception {
         while (true) {
             MainMenu();
         }
@@ -88,8 +81,7 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     //#endregion
 
     //region Menu principal
-    public static void MainMenu() 
-    {
+    public static void MainMenu() {
         System.out.println("=== Menu Principal ===");
         System.out.println("1 - Cadastro de pessoas");
         System.out.println("2 - Cadastro de tipos de objetos");
@@ -124,8 +116,7 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     //#endregion
 
     //region Menu de controle de pessoas
-    public static void displayPeopleMenu() 
-    {
+    public static void displayPeopleMenu() {
         System.out.println("1 - Incluir pessoa");
         System.out.println("2 - Alterar pessoa");
         System.out.println("3 - Remover pessoa");
@@ -158,16 +149,14 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 1 - Cadastrar pessoas.
-    public static void InsertPerson() 
-    {
+    public static void InsertPerson() {
         String nome = "";
 
-        while (nome.isEmpty())
-        {
+        while (nome.isEmpty()) {
             System.out.println("Digite o nome da pessoa: ");
             nome = scanner.nextLine().trim();
         }
-        
+
         Pessoa novaPessoa = new Pessoa(nome);
         pessoas.add(novaPessoa);
 
@@ -175,35 +164,83 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 2 - Alterar pessoas cadastradas.
-    public static void ChangePerson() 
-    {
-
-    }
-
-    // 3 - Remover alguma pessoa cadastrada.
-    public static void RemovePerson() 
-    {
-
-    }
-
-    // 4 - Consultar as pessoas cadastradas.
-    public static void ConsultPeople() 
-    {
-        if (pessoas.isEmpty())
-        {
+    public static void ChangePerson() {
+        // Checando se realmente há cadastros.
+        if (pessoas.isEmpty()) {
             System.out.println("Não há pessoas cadastradas.");
         } else {
             System.out.println("Pessoas cadastradas: ");
-            for (Pessoa p: pessoas) {
-                System.out.println(p);
+            // Listando os cadastros:
+            for (int i = 0; i < pessoas.size(); i++) {
+                System.out.println((i + 1) + " - " + pessoas.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro da pessoa que deseja alterar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Código para caso o valor digitado seja menor que 1 ou maior que um número existente no index da lista, conste como uma opção inválida.
+            if (index < 1 || index > pessoas.size()) {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+
+            // Redirecionando e indicando a escolha do usuário.
+            Pessoa pessoaSelecionada = pessoas.get(index - 1);
+
+            System.out.println("Digite o novo nome (ou deixe em branco para cancelar a alteração): ");
+            String novoNome = scanner.nextLine().trim();
+
+            // Checando se o valor de entrada é vazio, para cancelar a operação, ou adicionando/alterando o nome selecionado para o novo nome digitado e armazenado no atributo "novoNome".
+            if (novoNome.isEmpty()) {
+                System.out.println("Alteração cancelada com sucesso.");
+            } else {
+                pessoaSelecionada = new Pessoa(novoNome);
+                pessoas.set(index - 1, pessoaSelecionada);
+            }
+
+            System.out.println("Nome alterado com sucesso!");
+        }
+    }
+
+    // 3 - Remover alguma pessoa cadastrada.
+    public static void RemovePerson() {
+        // Checando se há cadastros.
+        if (pessoas.isEmpty()) {
+            System.out.println("Não há pessoas cadastradas");
+        } else {
+            // Listando os cadastros.
+            for (int i = 0; i < pessoas.size(); i++) {
+                System.out.println((i + 1) + " - " + pessoas.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro da pessoa que deseja remover: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Checando se o valor digitado é maior que 0 e menor que o maior index do cadastro, para então remover o código que foi selecionado.
+            if (index > 0 && index <= pessoas.size()) {
+                pessoas.remove(index - 1);
+                System.out.println("Pessoa removida com sucesso!");
+                // Caso o valor for inválido, o else será chamado.
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+
+    // 4 - Consultar as pessoas cadastradas.
+    public static void ConsultPeople() {
+        if (pessoas.isEmpty()) {
+            System.out.println("Não há pessoas cadastradas.");
+        } else {
+            System.out.println("Pessoas cadastradas: ");
+            for (int i = 0; i < pessoas.size(); i++) {
+                System.out.println((i + 1) + " - " + pessoas.get(i).toString());
             }
         }
     }
     //#endregion
 
     //region Menu de controle dos tipos de objetos.
-    public static void displayObjectTypeMenu() 
-    {
+    public static void displayObjectTypeMenu() {
         System.out.println("1 - Incluir um tipo de objeto");
         System.out.println("2 - Alterar um tipo de objeto");
         System.out.println("3 - Remover um tipo de objeto");
@@ -234,18 +271,16 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
         }
 
     }
-    
+
     // 1 - Inserir tipo de objeto.
-    public static void InsertObjectType()
-    {
+    public static void InsertObjectType() {
         String tipo = "";
 
-        while (tipo.isEmpty())
-        {
+        while (tipo.isEmpty()) {
             System.out.println("Digite o tipo de objeto que deseja cadastrar: ");
             tipo = scanner.nextLine().trim();
         }
-        
+
         TipoDeObjeto novoTipo = new TipoDeObjeto(tipo);
         tipos.add(novoTipo);
 
@@ -253,35 +288,83 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 2 - Alterar algum tipo de objeto cadastrado.
-    public static void ChangeObjectType()
-    {
-        
+    public static void ChangeObjectType() {
+        // Checando se realmente há cadastros.
+        if (tipos.isEmpty()) {
+            System.out.println("Não há tipos de objeto cadastrados.");
+        } else {
+            System.out.println("Tipos de objetos cadastrados: ");
+            // Listando os cadastros:
+            for (int i = 0; i < tipos.size(); i++) {
+                System.out.println((i + 1) + " - " + tipos.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro do tipo de objeto que deseja alterar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Código para caso o valor digitado seja menor que 1 ou maior que um número existente no index da lista, conste como uma opção inválida.
+            if (index < 1 || index > tipos.size()) {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+
+            // Redirecionando e indicando a escolha do usuário.
+            TipoDeObjeto tipoSelecionado = tipos.get(index - 1);
+
+            System.out.println("Digite o novo nome (ou deixe em branco para cancelar a alteração): ");
+            String novoNome = scanner.nextLine().trim();
+
+            // Checando se o valor de entrada é vazio, para cancelar a operação, ou adicionando/alterando o nome selecionado para o novo nome digitado e armazenado no atributo "novoNome".
+            if (novoNome.isEmpty()) {
+                System.out.println("Alteração cancelada com sucesso.");
+            } else {
+                tipoSelecionado = new TipoDeObjeto(novoNome);
+                tipos.set(index - 1, tipoSelecionado);
+            }
+
+            System.out.println("Nome alterado com sucesso!");
+        }
     }
 
     // 3 - Remover algum tipo de objeto cadastrado.
-    public static void RemoveObjectType()
-    {
-        
+    public static void RemoveObjectType() {
+        // Checando se há cadastros.
+        if (tipos.isEmpty()) {
+            System.out.println("Não há tipos de objetos cadastrados");
+        } else {
+            // Listando os cadastros.
+            for (int i = 0; i < tipos.size(); i++) {
+                System.out.println((i + 1) + " - " + tipos.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro do tipo de objeto que deseja remover: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Checando se o valor digitado é maior que 0 e menor que o maior index do cadastro, para então remover o código que foi selecionado.
+            if (index > 0 && index <= tipos.size()) {
+                tipos.remove(index - 1);
+                System.out.println("Tipo de objeto removido com sucesso!");
+                // Caso o valor for inválido, o else será chamado.
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
     }
 
     // 4 - Consultar tipos de objetos cadastrados.
-    public static void ConsultTypesOfObjects()
-    {
-        if (tipos.isEmpty())
-        {
+    public static void ConsultTypesOfObjects() {
+        if (tipos.isEmpty()) {
             System.out.println("Não há tipos de objeto cadastrados.");
         } else {
             System.out.println("Tipos de objetos cadastrados");
-            for (TipoDeObjeto t: tipos){
-                System.out.println(t);
+            for (int i = 0; i < tipos.size(); i++) {
+                System.out.println((i + 1) + " - " + tipos.get(i).toString());
             }
         }
     }
     //#endregion
 
     //region Menu de controle dos objetos.
-    public static void displayObjectMenu() 
-    {
+    public static void displayObjectMenu() {
         System.out.println("1 - Incluir um objeto");
         System.out.println("2 - Alterar um objeto");
         System.out.println("3 - Remover um objeto");
@@ -313,12 +396,10 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 1 - Inserir objeto.
-    public static void InsertObject()
-    {
+    public static void InsertObject() {
         String objeto = "";
 
-        while(objeto.isEmpty())
-        {
+        while (objeto.isEmpty()) {
             System.out.println("Digite o objeto que você deseja cadastrar: ");
             objeto = scanner.nextLine().trim();
         }
@@ -330,35 +411,83 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 2 - Alterar algum objeto cadastrado.
-    public static void ChangeObject()
-    {
-
-    } 
-
-    // 3 - Remover algum objeto cadastrado.
-    public static void RemoveObject()
-    {
-
-    } 
-
-    // 4 - Consultar objetos cadastrados.
-    public static void ConsultObjects()
-    {
-        if(objetos.isEmpty())
-        {   
+    public static void ChangeObject() {
+        // Checando se realmente há cadastros.
+        if (objetos.isEmpty()) {
             System.out.println("Não há objetos cadastrados.");
         } else {
             System.out.println("Objetos cadastrados: ");
-            for(Objeto o: objetos){
-                System.out.println(o);
+            // Listando os cadastros:
+            for (int i = 0; i < objetos.size(); i++) {
+                System.out.println((i + 1) + " - " + objetos.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro do objeto que deseja alterar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Código para caso o valor digitado seja menor que 1 ou maior que um número existente no index da lista, conste como uma opção inválida.
+            if (index < 1 || index > objetos.size()) {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+
+            // Redirecionando e indicando a escolha do usuário.
+            Objeto objetoSelecionado = objetos.get(index - 1);
+
+            System.out.println("Digite o novo nome (ou deixe em branco para cancelar a alteração): ");
+            String novoNome = scanner.nextLine().trim();
+
+            // Checando se o valor de entrada é vazio, para cancelar a operação, ou adicionando/alterando o nome selecionado para o novo nome digitado e armazenado no atributo "novoNome".
+            if (novoNome.isEmpty()) {
+                System.out.println("Alteração cancelada com sucesso.");
+            } else {
+                objetoSelecionado = new Objeto(novoNome);
+                objetos.set(index - 1, objetoSelecionado);
+            }
+
+            System.out.println("Nome alterado com sucesso!");
+        }
+    }
+
+    // 3 - Remover algum objeto cadastrado.
+    public static void RemoveObject() {
+        // Checando se há cadastros.
+        if (objetos.isEmpty()) {
+            System.out.println("Não há objetos cadastrados");
+        } else {
+            // Listando os cadastros.
+            for (int i = 0; i < objetos.size(); i++) {
+                System.out.println((i + 1) + " - " + objetos.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro do objeto que deseja remover: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Checando se o valor digitado é maior que 0 e menor que o maior index do cadastro, para então remover o código que foi selecionado.
+            if (index > 0 && index <= objetos.size()) {
+                objetos.remove(index - 1);
+                System.out.println("Objeto removido com sucesso!");
+                // Caso o valor for inválido, o else será chamado.
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+
+    // 4 - Consultar objetos cadastrados.
+    public static void ConsultObjects() {
+        if (objetos.isEmpty()) {
+            System.out.println("Não há objetos cadastrados.");
+        } else {
+            System.out.println("Objetos cadastrados: ");
+            for (int i = 0; i < objetos.size(); i++) {
+                System.out.println((i + 1) + " - " + objetos.get(i).toString());
             }
         }
     }
     //#endregion
 
     //region Menu de controle das manutenções das ferramentas.
-    public static void displayMaintenanceMenu() 
-    {
+    public static void displayMaintenanceMenu() {
         System.out.println("1 - Incluir uma manutenção");
         System.out.println("2 - Alterar uma manutenção");
         System.out.println("3 - Remover uma manutenção");
@@ -390,12 +519,10 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 1 - Inserir manutenção.
-    public static void InsertMaintenance()
-    {
+    public static void InsertMaintenance() {
         String manutencao = "";
 
-        while(manutencao.isEmpty())
-        {
+        while (manutencao.isEmpty()) {
             System.out.println("Digite a manutenção que você deseja cadastrar: ");
             manutencao = scanner.nextLine().trim();
         }
@@ -406,27 +533,76 @@ static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar
     }
 
     // 2 - Alterar alguma manutenção cadastrada.
-    public static void ChangeMaintenance()
-    {
-
-    }
-
-    // 3 - Remover alguma manutenção cadastrada.
-    public static void RemoveMaintenance()
-    {
-
-    }
-
-    // 4 - Consultar manutenções cadastradas.
-    public static void ConsultMaintenance()
-    {
-        if(manutencoes.isEmpty())
-        {
+    public static void ChangeMaintenance() {
+        // Checando se realmente há cadastros.
+        if (manutencoes.isEmpty()) {
             System.out.println("Não há manutenções cadastradas.");
         } else {
             System.out.println("Manutenções cadastradas: ");
-            for(Manutencao m: manutencoes){
-                System.out.println(m);
+            // Listando os cadastros:
+            for (int i = 0; i < manutencoes.size(); i++) {
+                System.out.println((i + 1) + " - " + manutencoes.get(i).toString());
+            }
+            System.out.println("Digite o número da manutenção que deseja alterar: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Código para caso o valor digitado seja menor que 1 ou maior que um número existente no index da lista, conste como uma opção inválida.
+            if (index < 1 || index > manutencoes.size()) {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+
+            // Redirecionando e indicando a escolha do usuário.
+            Manutencao manutencaoSelecionada = manutencoes.get(index - 1);
+
+            System.out.println("Digite o novo nome (ou deixe em branco para cancelar a alteração): ");
+            String novoNome = scanner.nextLine().trim();
+
+            // Checando se o valor de entrada é vazio, para cancelar a operação, ou adicionando/alterando o nome selecionado para o novo nome digitado e armazenado no atributo "novoNome".
+            if (novoNome.isEmpty()) {
+                System.out.println("Alteração cancelada com sucesso.");
+            } else {
+                manutencaoSelecionada = new Manutencao(novoNome);
+                manutencoes.set(index - 1, manutencaoSelecionada);
+            }
+
+            System.out.println("Nome alterado com sucesso!");
+        }
+    }
+
+    // 3 - Remover alguma manutenção cadastrada.
+    public static void RemoveMaintenance() {
+        // Checando se há cadastros.
+        if (manutencoes.isEmpty()) {
+            System.out.println("Não há manutenções cadastradas");
+        } else {
+            // Listando os cadastros.
+            for (int i = 0; i < manutencoes.size(); i++) {
+                System.out.println((i + 1) + " - " + manutencoes.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro da manutenção que deseja remover: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            // Checando se o valor digitado é maior que 0 e menor que o maior index do cadastro, para então remover o código que foi selecionado.
+            if (index > 0 && index <= manutencoes.size()) {
+                manutencoes.remove(index - 1);
+                System.out.println("Manutenção removida com sucesso!");
+                // Caso o valor for inválido, o else será chamado.
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+
+    // 4 - Consultar manutenções cadastradas.
+    public static void ConsultMaintenance() {
+        if (manutencoes.isEmpty()) {
+            System.out.println("Não há manutenções cadastradas.");
+        } else {
+            System.out.println("Manutenções cadastradas: ");
+            for (int i = 0; i < manutencoes.size(); i++) {
+                System.out.println((i + 1) + " - " + manutencoes.get(i).toString());
             }
         }
     }
