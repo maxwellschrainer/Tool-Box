@@ -8,8 +8,8 @@ class Pessoa {
 
     private String pessoa;
 
-    public Pessoa(String name) {
-        this.pessoa = name;
+    public Pessoa(String nome) {
+        this.pessoa = nome;
     }
 
     public String toString() {
@@ -23,8 +23,8 @@ class TipoDeObjeto {
 
     private String tipo;
 
-    public TipoDeObjeto(String type) {
-        this.tipo = type;
+    public TipoDeObjeto(String tipo) {
+        this.tipo = tipo;
     }
 
     public String toString() {
@@ -37,13 +37,24 @@ class TipoDeObjeto {
 class Objeto {
 
     private String objeto;
+    private boolean disponivel;
 
-    public Objeto(String object) {
-        this.objeto = object;
+    public Objeto(String objeto) {
+        this.objeto = objeto;
+        this.disponivel = true;
     }
 
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    @Override
     public String toString() {
-        return "Objeto: " + objeto;
+        return "Objeto: " + objeto + " (Disponível: " + (disponivel ? "Sim" : "Não") + ")";
     }
 }
 //#endregion
@@ -53,12 +64,43 @@ class Manutencao {
 
     private String manutencao;
 
-    public Manutencao(String maintenance) {
-        this.manutencao = maintenance;
+    public Manutencao(String manutencao) {
+        this.manutencao = manutencao;
     }
 
     public String toString() {
         return "Manutenção: " + manutencao;
+    }
+}
+//#endregion
+
+//#region Criação da classe "Emprestimo".
+class Emprestimo {
+
+    private Pessoa pessoa;
+    private Objeto objeto;
+    private String dataEmprestimo;
+
+    public Emprestimo(Pessoa pessoa, Objeto objeto, String dataEmprestimo) {
+        this.pessoa = pessoa;
+        this.objeto = objeto;
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public Objeto getObjeto() {
+        return objeto;
+    }
+
+    public String getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public String toString() {
+        return pessoa + ", " + objeto + ", Data do Empréstimo: " + dataEmprestimo;
     }
 }
 //#endregion
@@ -71,6 +113,7 @@ public class Toolbox {
     static List<TipoDeObjeto> tipos = new ArrayList<>(); // Lista para armazenar o cadastro dos tipos de objeto enquanto o código estiver rodando.
     static List<Objeto> objetos = new ArrayList<>(); // Lista para armazenar o cadastro dos objetos enquanto o código estiver rodando.
     static List<Manutencao> manutencoes = new ArrayList<>(); // Lista para armazenar o cadastro das manutenções enquanto o código estiver rodando. 
+    static List<Emprestimo> emprestimos = new ArrayList<>(); // Lista para armazenar o cadastro dos empréstimos enquanto o código estiver rodando. 
 //#endregion
 
     //region Public Static Void MAIN
@@ -89,6 +132,7 @@ public class Toolbox {
         System.out.println("2 - Cadastro de tipos de objetos");
         System.out.println("3 - Cadastro de objetos");
         System.out.println("4 - Cadastro de manutenções");
+        System.out.println("5 - Cadastro de empréstimos");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
 
@@ -106,6 +150,9 @@ public class Toolbox {
                 break;
             case 4:
                 displayMaintenanceMenu(); // Menu de cadastros de manutenções.
+                break;
+            case 5:
+                displayLoanMenu(); // Menu de cadastro de empréstimos.
                 break;
             case 0:
                 System.out.println("Encerrando o programa.");
@@ -605,6 +652,149 @@ public class Toolbox {
             System.out.println("Manutenções cadastradas: ");
             for (int i = 0; i < manutencoes.size(); i++) {
                 System.out.println((i + 1) + " - " + manutencoes.get(i).toString());
+            }
+        }
+    }
+    //#endregion
+
+    //region Menu de controle dos empréstimos.
+    public static void displayLoanMenu() {
+        System.out.println("1 - Incluir um empréstimo");
+        System.out.println("2 - Consultar empréstimos");
+        System.out.println("3 - Remover um empréstimo");
+        System.out.println("0 - Voltar ao menu principal");
+        System.out.print("Escolha uma opção: ");
+
+        int option = scanner.nextInt(); // Scanner para ler o que for digitado e aplicar nas opções do "switch".
+        scanner.nextLine();
+
+        switch (option) {
+            case 1:
+                InsertLoan(); // Inserir um empréstimo.
+                break;
+            case 2:
+                ConsultLoan(); // Consulta empréstimos cadastrados.
+                break;
+            case 3:
+                RemoveLoan(); // Remover algum empréstimo cadastrado.
+                break;
+            case 0:
+                System.out.println("Fechando o menu de cadastro de empréstimos.");
+                MainMenu();
+            default: // Caso seja digitado alguma opção sem ser as propostas.
+                System.out.println("Opção inválida. Tente novamente.");
+        }
+    }
+
+    // 1 - Inserir objeto.
+    public static void InsertLoan() {
+        if (pessoas.isEmpty()) {
+            System.out.println("Não há pessoas cadastradas");
+            return;
+        }
+
+        if (objetos.isEmpty()) {
+            System.out.println("Não há objetos cadastrados");
+            return;
+        }
+
+        System.out.println("Pessoas cadastradas: ");
+        for (int i = 0; i < pessoas.size(); i++) {
+            System.out.println((i + 1) + " - " + pessoas.get(i).toString());
+        }
+
+        System.out.println("Escolha o número do cadastro da pessoa que pegará o objeto: ");
+        int pessoaIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        if (pessoaIndex < 1 || pessoaIndex > pessoas.size()) {
+            System.out.println("Pessoa inválida. Tente novamente.");
+        }
+
+        System.out.println("Objetos disponíveis: ");
+        boolean temDisponivel = false;
+        for (int i = 0; i < objetos.size(); i++) {
+            if (objetos.get(i).isDisponivel()) {
+                System.out.println((i + 1) + " - " + objetos.get(i).toString());
+                temDisponivel = true;
+            }
+        }
+
+        if (!temDisponivel) {
+            System.out.println("Não há objetos disponíveis para empréstimo.");
+            return;
+        }
+
+        System.out.println("Objetos cadastrados: ");
+        for (int i = 0; i < objetos.size(); i++) {
+            System.out.println((i + 1) + " - " + objetos.get(i).toString());
+        }
+
+        System.out.println("Escolha o número do cadastro do objeto a ser emprestado: ");
+        int objetoIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        if (objetoIndex < 1 || objetoIndex > objetos.size() || !objetos.get(objetoIndex - 1).isDisponivel()) {
+            System.out.println("Objeto inválido ou indisponível.");
+            return;
+        }
+
+        System.out.print("Digite a data do empréstimo: ");
+        String dataEmprestimo = scanner.nextLine();
+
+        Pessoa pessoaSelecionada = pessoas.get(pessoaIndex - 1);
+        Objeto objetoSelecionado = objetos.get(objetoIndex - 1);
+
+        objetoSelecionado.setDisponivel(false); // Marca o objeto como indisponível
+        Emprestimo novoEmprestimo = new Emprestimo(pessoaSelecionada, objetoSelecionado, dataEmprestimo);
+        emprestimos.add(novoEmprestimo);
+
+        System.out.println("Empréstimo registrado com sucesso!");
+    }
+
+    // 2 - Alterar algum objeto cadastrado.
+    public static void ConsultLoan() {
+        if (emprestimos.isEmpty()) {
+            System.out.println("Não há empréstimos registrados.");
+        } else {
+            System.out.println("Empréstimos registrados: ");
+            for (int i = 0; i < emprestimos.size(); i++) {
+                System.out.println((i + 1) + " - " + emprestimos.get(i).toString());
+            }
+        }
+    }
+
+    // 3 - Remover algum objeto cadastrado.
+    public static void RemoveLoan() {
+        // Checando se há cadastros.
+        if (emprestimos.isEmpty()) {
+            System.out.println("Não há empréstimos cadastrados");
+        } else {
+            // Listando os cadastros.
+            for (int i = 0; i < emprestimos.size(); i++) {
+                System.out.println((i + 1) + " - " + emprestimos.get(i).toString());
+            }
+            System.out.println("Digite o número do cadastro do empréstimo que deseja remover: ");
+            int index = scanner.nextInt();
+            scanner.nextLine();
+
+            if (index < 1 || index > emprestimos.size()) {
+                System.out.println("Empréstimo inválido.");
+                return;
+            }
+
+            Emprestimo emprestimoSelecionado = emprestimos.get(index - 1);
+            Objeto objetoEmprestado = emprestimoSelecionado.getObjeto();
+
+            objetoEmprestado.setDisponivel(true);
+
+            // Checando se o valor digitado é maior que 0 e menor que o maior index do cadastro, para então remover o código que foi selecionado.
+            if (index > 0 && index <= emprestimos.size()) {
+                emprestimos.remove(index - 1);
+                System.out.println("Empréstimo removido com sucesso!");
+                // Caso o valor for inválido, o else será chamado.
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
             }
         }
     }
